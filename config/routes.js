@@ -29,6 +29,8 @@ module.exports = function (app) {
   // If new event, then send POST request to phone numbers.
   var pingAPI = function pingAPI () {
     Worldcup.getEvents( function (err, data) {
+      console.log('new event:');
+      console.log(data);
       if (data.length > 0) {
         // Tweet it.
         T.post('statuses/update', { status: this },
