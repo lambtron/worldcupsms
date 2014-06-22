@@ -104,8 +104,8 @@ module.exports = function (app) {
         User.upsertUser(this.phone_number, this.type, function (err, records) {
           var msg = "You have updated your subscription settings to '" +
             this.type + "\'.";
-          Twilio.sendMessage(user.phone_number, TWILIO_PHONE_NUMBER, msg);
-        });
+          Twilio.sendMessage(this.phone_number, TWILIO_PHONE_NUMBER, msg);
+        }.bind(this));
       } else {
         // Add new.
         User.create.create({
