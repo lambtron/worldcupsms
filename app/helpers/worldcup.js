@@ -43,11 +43,9 @@
               if (newEvents.length > 0) {
                 for (var j = 0; j < newEvents.length; j++) {
                   (function (j) {
-                    if (newEvents[j].type_of_event == "goal") {
-                      eventDescription += newEvents[j].time + ": " +
-                        newEvents[j].type_of_event + ", " +
-                        newEvents[j].player + ". ";
-                    }
+                    eventDescription += newEvents[j].time + ": " +
+                      newEvents[j].type_of_event + ", " +
+                      newEvents[j].player + ". ";
                   })(j);
                 }
               }

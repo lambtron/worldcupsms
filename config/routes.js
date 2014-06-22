@@ -39,15 +39,17 @@ module.exports = function (app) {
             console.log(data);
         });
 
-        // Text everyone.
-        User.create.find({}).exec(function (err, data) {
-          for (var i = 0; i < data.length; i ++) {
-            (function (i, event) {
-              Twilio.sendMessage(data[i].phone_number, TWILIO_PHONE_NUMBER,
-                event);
-            })(i, this);
-          }
-        }.bind(data));
+        if (data.indexOf('goal') > -1) {
+          // Text everyone.
+          User.create.find({}).exec(function (err, data) {
+            for (var i = 0; i < data.length; i ++) {
+              (function (i, event) {
+                Twilio.sendMessage(data[i].phone_number, TWILIO_PHONE_NUMBER,
+                  event);
+              })(i, this);
+            }
+          }.bind(data));
+        }
       };
     });
   };
