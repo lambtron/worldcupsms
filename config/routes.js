@@ -79,10 +79,10 @@ module.exports = function (app) {
     var body = req.body.Body.toLowerCase();
 
     // console.log(req.body.Body);
-    if (body.indexOf('card') > -1)
-      type = "card";
-    else if (body.indexOf('sub') > -1)
+    if (body.indexOf('sub') > -1)
       type = "sub";
+    else if (body.indexOf('card') > -1)
+      type = "card";
     else
       type = "goal";
 
