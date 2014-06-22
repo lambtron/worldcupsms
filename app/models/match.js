@@ -5,6 +5,7 @@ var mongoose = require('mongoose')
 var MatchSchema = new Schema({
     id: ObjectId,
     match_number: Number,
+    status: String,
     events: Array
 });
 
@@ -13,11 +14,7 @@ var Match = mongoose.model("Match", MatchSchema);
 module.exports = {
   create: Match,
 
-  test: function () {
-    console.log('hi');
-  },
-
-  upsertMatch: function (match_number, events) {
+  upsertMatch: function (match_number, status, events) {
     var error = function (err) {
       if (err)
         throw err;
@@ -25,7 +22,8 @@ module.exports = {
 
     Match.update( {match_number: match_number}, {
       $set: {
-        events: events
+        events: events,
+        status: status
       }
     },
     {upsert: true},

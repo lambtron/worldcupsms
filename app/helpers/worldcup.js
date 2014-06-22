@@ -35,23 +35,37 @@
               this.away_team_events);
             var eventDescription = '';
 
-            if (data.length == 0) {
-              eventDescription = "New match between "
-                + this.home_team.country + " and "
-                + this.away_team.country + " at "
-                + this.location;
-
-            } else {
+            if (data.length > 0) {
               // Match exists. Find difference in events array.
               var newEvents = _.difference(events, data[0].events);
               if (newEvents.length > 0) {
-                eventDescription = newEvents[0].time + ": " +
-                  newEvents[0].type_of_event + ", " + newEvents[0].player;
+                for (var j = 0; j < newEvents.length; j++) {
+                  (function (j) {
+                    eventDescription += newEvents[j].time + ": " +
+                      newEvents[j].type_of_event + ", " + newEvents[j].player +
+                      ". ";
+                  })(j);
+                }
+              }
+
+              // Check status.
+              if (this.status != data[0].status) {
+                if (this.status == "in progress") {
+                  // Game just started.
+                  eventDescription = "New game started between " +
+                    this.home_team.country + " and " + this.away_team.country +
+                    " at " + this.location + ".";
+                } else if (this.status == "completed") {
+                  eventDescription = "Game is over! Final score is " +
+                    this.home_team.country + ": " + this.home_team.goals +
+                    ", " + this.away_team.country + ": " +
+                    this.away_team.goals + ".";
+                }
               }
             }
 
             // Also upsert.
-            Match.upsertMatch( this.match_number, events );
+            Match.upsertMatch( this.match_number, this.status, events );
 
             cb(err, eventDescription);
           }.bind(matches[i]));
