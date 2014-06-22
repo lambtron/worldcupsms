@@ -43,6 +43,9 @@ module.exports = function (app) {
           User.create.find({}).exec(function (err, users) {
             for (var i = 0; i < users.length; i ++) {
               (function (i, event) {
+                var type = users[i].type;
+                if (!type)
+                  type = "goal";
                 if (users[i].type == 'sub') {
                   Twilio.sendMessage(users[i].phone_number, TWILIO_PHONE_NUMBER,
                     event);
@@ -50,8 +53,8 @@ module.exports = function (app) {
                   event.indexOf('sub') == -1) {
                   Twilio.sendMessage(users[i].phone_number, TWILIO_PHONE_NUMBER,
                     event);
-                } else if (users[i].type == 'goal' &&
-                  event.indexOf('sub') == -1 && event.indexOf('card') == -1) {
+                } else if ( event.indexOf('sub') == -1 &&
+                  event.indexOf('card') == -1) {
                   Twilio.sendMessage(users[i].phone_number, TWILIO_PHONE_NUMBER,
                     event);
                 }
