@@ -72,7 +72,7 @@ module.exports = function (app) {
   }, 6000);
 
 	// Application routes ========================================================
-  app.get('/new', function (req, res) {
+  app.post('/new', function (req, res) {
     // New person texting us.
     var phone_number = Twilio.standardizePhoneNumber(req.body.From);
     var type = ""; // goals, cards, subs
