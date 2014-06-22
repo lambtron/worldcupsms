@@ -8,7 +8,7 @@ var express = require('express')
   , port = process.env.PORT || 3000;
 
 // Set environmental variables. ================================================
-require('./config/config');
+// require('./config/config');
 
 // Configuration ===============================================================
 app.set('views', __dirname + 'public/views');
