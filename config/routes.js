@@ -50,8 +50,8 @@ module.exports = function (app) {
     }, function(err, user) {
       // Success.
       // console.log(user);
-      var welcome = "Thanks for subscribing. At anytime you wish to end, just" +
-        " respond with STOP.";
+      var welcome = "Thanks for subscribing to FIFA World Cup 2014 text" +
+        " updates. At anytime you wish to end, just respond with STOP.";
       Twilio.sendMessage(user.phone_number, TWILIO_PHONE_NUMBER, welcome);
     });
   });

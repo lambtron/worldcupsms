@@ -8,7 +8,8 @@ var express = require('express')
   , port = process.env.PORT || 3000;
 
 // Set environmental variables. ================================================
-// require('./config/config');
+if (!process.env.TWILIO_ASID)
+  require('./config/config');
 
 // Configuration ===============================================================
 app.set('views', __dirname + 'public/views');
