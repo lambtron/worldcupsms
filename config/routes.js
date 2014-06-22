@@ -85,6 +85,11 @@ module.exports = function (app) {
     else
       type = "goal";
 
+    var load = {
+      phone_number: phone_number,
+      type: type
+    };
+
     // Add to mongoDB.
     User.create.find({phone_number: phone_number}).exec(function (err, users) {
       if (users.length > 0) {
