@@ -37,7 +37,9 @@
 
             if (data.length > 0) {
               // Match exists. Find difference in events array.
-              var newEvents = _.difference(events, data[0].events);
+              var newEvents = _.filter(events, function (obj) {
+                return !_.findWhere(data[0].events, obj);
+              });
               if (newEvents.length > 0) {
                 for (var j = 0; j < newEvents.length; j++) {
                   (function (j) {
@@ -67,6 +69,7 @@
             // Also upsert.
             Match.upsertMatch( this.match_number, this.status, events );
 
+            console.log(eventDescription);
             cb(err, eventDescription);
           }.bind(matches[i]));
         };
