@@ -72,7 +72,7 @@ module.exports = function (app) {
   }, 6000);
 
 	// Application routes ========================================================
-  app.post('/new', function (req, res) {
+  app.get('/new', function (req, res) {
     // New person texting us.
     var phone_number = Twilio.standardizePhoneNumber(req.body.From);
     var type = ""; // goals, cards, subs
@@ -86,15 +86,34 @@ module.exports = function (app) {
       type = "goal";
 
     // Add to mongoDB.
-    User.create.create({
-      phone_number: phone_number,
-      type: type
-    }, function(err, user) {
-      // Success.
-      var welcome = "Thanks for subscribing to FIFA World Cup 2014 text" +
-        " updates. At anytime you wish to end, just respond with STOP.";
-      Twilio.sendMessage(user.phone_number, TWILIO_PHONE_NUMBER, welcome);
-    });
+    User.create.find({phone_number: phone_number}).exec(function (err, users) {
+      if (users.length > 0) {
+        // Delete all duplicates.
+        for (var i = 0; i < users.length - 1; i++) {
+          (function (user) {
+            user.remove();
+          })(users[i]);
+        }
+
+        // Exists, so just update.
+        User.upsertUser(this.phone_number, this.type, function (err, records) {
+          var msg = "You have updated your subscription settings to '" +
+            this.type + "\'.";
+          Twilio.sendMessage(user.phone_number, TWILIO_PHONE_NUMBER, msg);
+        });
+      } else {
+        // Add new.
+        User.create.create({
+          phone_number: phone_number,
+          type: type
+        }, function(err, user) {
+          // Success.
+          var welcome = "Thanks for subscribing to FIFA World Cup 2014 text" +
+            " updates. At anytime you wish to end, just respond with STOP.";
+          Twilio.sendMessage(user.phone_number, TWILIO_PHONE_NUMBER, welcome);
+        });
+      }
+    }.bind(load));
   });
 
 	app.get('/', function (req, res) {
