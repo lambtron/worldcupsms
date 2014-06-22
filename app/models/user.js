@@ -4,6 +4,7 @@ var mongoose = require('mongoose')
 
 var UserSchema = new Schema({
     id: ObjectId,
+    type: String, // goals, cards, subs
     phone_number: String
 });
 

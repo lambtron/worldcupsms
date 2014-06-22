@@ -48,7 +48,7 @@ module.exports = function (app) {
                   event);
               })(i, this);
             }
-          }.on(data));
+          }.bind(data));
         }
       };
     });
@@ -63,10 +63,21 @@ module.exports = function (app) {
   app.post('/new', function (req, res) {
     // New person texting us.
     var phone_number = Twilio.standardizePhoneNumber(req.body.From);
+    var type = ""; // goals, cards, subs
+    var body = req.body.Body.toLowerCase();
+
+    // console.log(req.body.Body);
+    if (body.indexOf('goal') > -1)
+      type = "goal";
+    else if (body.indexOf('card') > -1)
+      type = "card";
+    else if (body.indexOf('sub') > -1)
+      type = "sub";
 
     // Add to mongoDB.
     User.create.create({
-      phone_number: phone_number
+      phone_number: phone_number,
+      type: type
     }, function(err, user) {
       // Success.
       // console.log(user);
