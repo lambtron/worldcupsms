@@ -33,7 +33,8 @@ module.exports = function (app) {
       console.log(data);
       if (data.length > 0) {
         // Tweet it.
-        T.post('statuses/update', { status: data },
+        var status = data + ' #worldcup';
+        T.post('statuses/update', { status: status },
           function (err, data, response) {
             console.log(data);
         });
