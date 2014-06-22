@@ -6,7 +6,7 @@
   "main": "server.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/lambtron/worldcup"
+    "url": "https://github.com/lambtron/worldcupsms"
   },
   "engines": {
     "node": "0.10.22",

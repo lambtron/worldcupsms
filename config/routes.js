@@ -49,7 +49,10 @@ module.exports = function (app) {
       phone_number: phone_number
     }, function(err, user) {
       // Success.
-      console.log(user);
+      // console.log(user);
+      var welcome = "Thanks for subscribing. At anytime you wish to end, just" +
+        " respond with STOP.";
+      Twilio.sendMessage(user.phone_number, TWILIO_PHONE_NUMBER, welcome);
     });
   });
 
