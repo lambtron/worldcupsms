@@ -22,6 +22,8 @@ module.exports = function (app) {
   var pingAPI = function pingAPI () {
     Worldcup.getEvents( function (err, data) {
       if (data.length > 0) {
+        // Tweet it.
+
         User.create.find({}).exec(function (err, data) {
           for (var i = 0; i < data.length; i ++) {
             (function (i) {
