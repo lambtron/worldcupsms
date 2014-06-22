@@ -7,6 +7,14 @@
  */
 var Twilio = require('../app/helpers/twilio');
 var Worldcup = require('../app/helpers/worldcup');
+var Twit = require('twit');
+
+var T = new Twit({
+    consumer_key: process.env.TWIT_CONSUMER_KEY
+  , consumer_secret: process.env.TWIT_CONSUMER_SECRET
+  , access_token: process.env.TWIT_ACCESS_TOKEN
+  , access_token_secret: process.env.TWIT_ACCESS_TOKEN_SECRET
+});
 
 /**
  * Import models ===============================================================
@@ -23,7 +31,12 @@ module.exports = function (app) {
     Worldcup.getEvents( function (err, data) {
       if (data.length > 0) {
         // Tweet it.
+        T.post('statuses/update', { status: this },
+          function (err, data, response) {
+            console.log(data);
+        });
 
+        // Text everyone.
         User.create.find({}).exec(function (err, data) {
           for (var i = 0; i < data.length; i ++) {
             (function (i) {
