@@ -39,7 +39,7 @@ module.exports = function (app) {
             console.log(data);
         });
 
-        if (data.indexOf('goal') > -1) {
+        if (data.indexOf('goal') > -1 || data.indexOf('game') > -1) {
           // Text everyone.
           User.create.find({}).exec(function (err, data) {
             for (var i = 0; i < data.length; i ++) {
