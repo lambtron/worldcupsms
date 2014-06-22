@@ -14,7 +14,7 @@ var Match = mongoose.model("Match", MatchSchema);
 module.exports = {
   create: Match,
 
-  upsertMatch: function (match_number, status, events, cb) {
+  upsertMatch: function (match_number, status, events) {
     var error = function (err) {
       if (err)
         throw err;
