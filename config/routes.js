@@ -45,7 +45,7 @@ module.exports = function (app) {
               (function (i, event) {
                 var type = users[i].type;
                 if (!type)
-                  type = "goal";
+                  type = 'goal';
                 if (users[i].type == 'sub') {
                   Twilio.sendMessage(users[i].phone_number, TWILIO_PHONE_NUMBER,
                     event);
@@ -79,12 +79,12 @@ module.exports = function (app) {
     var body = req.body.Body.toLowerCase();
 
     // console.log(req.body.Body);
-    if (body.indexOf('goal') > -1)
-      type = "goals";
-    else if (body.indexOf('card') > -1)
-      type = "cards";
+    if (body.indexOf('card') > -1)
+      type = "card";
     else if (body.indexOf('sub') > -1)
-      type = "subs";
+      type = "sub";
+    else
+      type = "goal";
 
     // Add to mongoDB.
     User.create.create({
