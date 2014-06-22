@@ -33,7 +33,7 @@ module.exports = function (app) {
       console.log(data);
       if (data.length > 0) {
         // Tweet it.
-        T.post('statuses/update', { status: this },
+        T.post('statuses/update', { status: data },
           function (err, data, response) {
             console.log(data);
         });
@@ -41,10 +41,10 @@ module.exports = function (app) {
         // Text everyone.
         User.create.find({}).exec(function (err, data) {
           for (var i = 0; i < data.length; i ++) {
-            (function (i) {
+            (function (i, event) {
               Twilio.sendMessage(data[i].phone_number, TWILIO_PHONE_NUMBER,
-                this);
-            })(i);
+                event);
+            })(i, this);
           }
         }.bind(data));
       };
