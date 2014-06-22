@@ -42,11 +42,9 @@
               });
               if (newEvents.length > 0) {
                 for (var j = 0; j < newEvents.length; j++) {
-                  (function (j) {
-                    eventDescription += newEvents[j].time + ": " +
-                      newEvents[j].type_of_event + ", " +
-                      newEvents[j].player + ". ";
-                  })(j);
+                  eventDescription += newEvents[j].time + ": " +
+                    newEvents[j].type_of_event + ", " +
+                    newEvents[j].player + ". ";
                 }
               }
 
