@@ -29,14 +29,12 @@ module.exports = function (app) {
   // If new event, then send POST request to phone numbers.
   var pingAPI = function pingAPI () {
     Worldcup.getEvents( function (err, data) {
-      console.log('new event:');
-      console.log(data);
       if (data.length > 0) {
         // Tweet it.
         var status = data + ' #worldcup';
         T.post('statuses/update', { status: status },
           function (err, data, response) {
-            console.log(data);
+            // Success.
         });
 
         if (data.indexOf('goal') > -1 || data.indexOf('game') > -1) {
