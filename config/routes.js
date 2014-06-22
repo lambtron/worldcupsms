@@ -48,7 +48,7 @@ module.exports = function (app) {
                   event);
               })(i, this);
             }
-          }.bind(data));
+          }.on(data));
         }
       };
     });
