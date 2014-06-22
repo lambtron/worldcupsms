@@ -71,7 +71,7 @@
 
             console.log(eventDescription);
             cb(err, eventDescription);
-          }.on(matches[i]));
+          }.bind(matches[i]));
         };
       });
     }
