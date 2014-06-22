@@ -18,6 +18,7 @@
     "underscore": "latest",
     "request": "latest",
     "mongoose": "latest",
-    "twilio": "latest"
+    "twilio": "latest",
+    "twit": "latest"
   }
 }
