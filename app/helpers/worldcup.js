@@ -25,7 +25,9 @@
       };
 
       request(opts, function (err, data) {
-        var matches = JSON.parse(data.body);
+        var matches = [];
+        if (data && data.body)
+          matches = JSON.parse(data.body);
 
         for (var i = 0; i < matches.length; i++ ) {
           Match.create.find({match_number: matches[i].match_number}).limit(1)
