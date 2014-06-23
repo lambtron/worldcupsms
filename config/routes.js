@@ -44,15 +44,16 @@ module.exports = function (app) {
                 var type = users[i].type;
                 if (!type)
                   type = 'goal';
+
                 if (users[i].type == 'sub') {
                   Twilio.sendMessage(users[i].phone_number, TWILIO_PHONE_NUMBER,
                     event);
                 } else if (users[i].type == 'card' &&
-                  event.indexOf('sub') == -1) {
+                  (event.indexOf('card') > 0 || event.indexOf('goal') > 0 ||
+                  event.indexOf('game') > 0)) {
                   Twilio.sendMessage(users[i].phone_number, TWILIO_PHONE_NUMBER,
                     event);
-                } else if ( event.indexOf('sub') == -1 &&
-                  event.indexOf('card') == -1) {
+                } else {
                   Twilio.sendMessage(users[i].phone_number, TWILIO_PHONE_NUMBER,
                     event);
                 }
