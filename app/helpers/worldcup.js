@@ -25,6 +25,9 @@
       };
 
       request(opts, function (err, data) {
+        console.log('data body:');
+        console.log(data.body);
+
         var matches = [];
         if (data && data.body)
           matches = JSON.parse(data.body);
