@@ -52,7 +52,7 @@ module.exports = function (app) {
                 event.indexOf('game') > 0)) {
                 Twilio.sendMessage(users[i].phone_number, TWILIO_PHONE_NUMBER,
                   event);
-              } else {
+              } else if (event.indexOf('goal') > 0 || event.indexOf('game') > 0) {
                 Twilio.sendMessage(users[i].phone_number, TWILIO_PHONE_NUMBER,
                   event);
               }
