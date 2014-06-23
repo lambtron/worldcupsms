@@ -37,30 +37,28 @@ module.exports = function (app) {
             // Success.
         });
 
-        if (data.indexOf('goal') > -1 || data.indexOf('game') > -1) {
-          User.create.find({}).exec(function (err, users) {
-            for (var i = 0; i < users.length; i ++) {
-              (function (i, event) {
-                var type = users[i].type;
-                if (!type)
-                  type = 'goal';
+        User.create.find({}).exec(function (err, users) {
+          for (var i = 0; i < users.length; i ++) {
+            (function (i, event) {
+              var type = users[i].type;
+              if (!type)
+                type = 'goal';
 
-                if (users[i].type == 'sub') {
-                  Twilio.sendMessage(users[i].phone_number, TWILIO_PHONE_NUMBER,
-                    event);
-                } else if (users[i].type == 'card' &&
-                  (event.indexOf('card') > 0 || event.indexOf('goal') > 0 ||
-                  event.indexOf('game') > 0)) {
-                  Twilio.sendMessage(users[i].phone_number, TWILIO_PHONE_NUMBER,
-                    event);
-                } else {
-                  Twilio.sendMessage(users[i].phone_number, TWILIO_PHONE_NUMBER,
-                    event);
-                }
-              })(i, this);
-            }
-          }.bind(data));
-        }
+              if (users[i].type == 'sub') {
+                Twilio.sendMessage(users[i].phone_number, TWILIO_PHONE_NUMBER,
+                  event);
+              } else if (users[i].type == 'card' &&
+                (event.indexOf('card') > 0 || event.indexOf('goal') > 0 ||
+                event.indexOf('game') > 0)) {
+                Twilio.sendMessage(users[i].phone_number, TWILIO_PHONE_NUMBER,
+                  event);
+              } else {
+                Twilio.sendMessage(users[i].phone_number, TWILIO_PHONE_NUMBER,
+                  event);
+              }
+            })(i, this);
+          }
+        }.bind(data));
       };
     });
   };
