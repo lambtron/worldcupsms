@@ -23,7 +23,7 @@ require('./config/routes.js')(app);
 require('./app/lib/db_connect');
 
 // New relic.
-require('newrelic');
+// require('newrelic');
 
 // Listen (start app with node server.js) ======================================
 server.listen(port, function() {

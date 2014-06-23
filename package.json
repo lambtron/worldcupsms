@@ -19,7 +19,7 @@
     "request": "latest",
     "mongoose": "latest",
     "twilio": "latest",
-    "twit": "latest",
-    "newrelic": "latest"
+    "twit": "latest"
+    // "newrelic": "latest"
   }
 }
