@@ -22,6 +22,9 @@ require('./config/routes.js')(app);
 // Database.
 require('./app/lib/db_connect');
 
+// New relic.
+require('newrelic');
+
 // Listen (start app with node server.js) ======================================
 server.listen(port, function() {
 	console.log("App is now listening on port " + port);
