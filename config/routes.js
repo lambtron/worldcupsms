@@ -30,6 +30,9 @@ module.exports = function (app) {
   var pingAPI = function pingAPI () {
     Worldcup.getEvents( function (err, data) {
       if (data.length > 0) {
+        console.log('\n\n');
+        console.log(data);
+
         // Tweet it.
         var status = data + ' #worldcup';
         T.post('statuses/update', { status: status },
@@ -44,18 +47,23 @@ module.exports = function (app) {
               if (!type)
                 type = 'goal';
 
+              console.log(users[i].type);
               if (users[i].type == 'sub') {
                 Twilio.sendMessage(users[i].phone_number, TWILIO_PHONE_NUMBER,
                   event);
+                console.log(event);
               } else if (users[i].type == 'card' &&
                 (event.indexOf('card') > 0 || event.indexOf('goal') > 0 ||
                 event.indexOf('game') > 0)) {
                 Twilio.sendMessage(users[i].phone_number, TWILIO_PHONE_NUMBER,
                   event);
+                console.log(event);
               } else if (event.indexOf('goal') > 0 || event.indexOf('game') > 0) {
                 Twilio.sendMessage(users[i].phone_number, TWILIO_PHONE_NUMBER,
                   event);
+                console.log(event);
               }
+              console.log('\n\n');
             })(i, this);
           }
         }.bind(data));

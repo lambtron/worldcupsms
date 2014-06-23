@@ -69,7 +69,6 @@
             // Also upsert.
             Match.upsertMatch( this.match_number, this.status, events );
 
-            console.log(eventDescription);
             cb(err, eventDescription);
           }.bind(matches[i]));
         };
