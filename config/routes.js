@@ -116,6 +116,8 @@ module.exports = function (app) {
         });
       }
     }.bind(load));
+
+    res.send(200);
   });
 
 	app.get('/', function (req, res) {
