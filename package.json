@@ -20,6 +20,5 @@
     "mongoose": "latest",
     "twilio": "latest",
     "twit": "latest"
-    // "newrelic": "latest"
   }
 }
