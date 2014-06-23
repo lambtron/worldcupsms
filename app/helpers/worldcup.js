@@ -25,11 +25,8 @@
       };
 
       request(opts, function (err, data) {
-        console.log('data body:');
-        console.log(data.body);
-
         var matches = [];
-        if (data && data.body)
+        if (data && data.body && (data.body.indexOf('<') == -1))
           matches = JSON.parse(data.body);
 
         for (var i = 0; i < matches.length; i++ ) {
