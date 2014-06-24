@@ -1,15 +1,12 @@
 # Worldcup SMS 2014
 
-App is here:
-http://worldcupsms.herokuapp.com/
-
-[Link](http://worldcupsms.herokuapp.com) "FIFA World Cup Alerts") to the FIFA world cup alerts.
+The FIFA world cup alerts app can be found [here](http://worldcupsms.herokuapp.com "FIFA World Cup Alerts").
 
 Subscribe to FIFA world cup events by texting **(415) 799-2563**.
 
 Text **GOAL** to receive all goals, and the start and end of matches; **CARD** to receive all goals, red / yellow cards, and the start and end of matches; and **SUB** to receive everything (goals, cards, substitions, and the start and end of matches). You can send **STOP** to discontinue SMS updates. Or follow [@fifaWCalerts](http://www.twitter.com/fifawcalerts) for tweet updates.
 
-# Running it locally
+## Running it locally
 
 You need
 - npm
@@ -37,6 +34,6 @@ $ mongod
 $ node server.js
 ```
 
-Any questions or comments, just tweet at me @andyjiang.
+Any questions or comments, just tweet at me [@andyjiang](http://www.twitter.com/andyjiang}.
 
 Happy coding!
