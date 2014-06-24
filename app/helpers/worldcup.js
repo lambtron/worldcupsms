@@ -78,8 +78,11 @@
               }
             }
 
-            // eventDescription += " #" + this.home_team.code + "v" +
-            //   this.away_team.code;
+            // If there is an event, add a hashtag.
+            if (eventDescription.length > 0) {
+              eventDescription += " #" + this.home_team.code + "v" +
+                this.away_team.code;
+            }
 
             // Also upsert.
             Match.upsertMatch(this.match_number, this.status, events);
