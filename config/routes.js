@@ -30,9 +30,6 @@ module.exports = function (app) {
   var pingAPI = function pingAPI () {
     Worldcup.getEvents( function (err, data) {
       if (data.length > 0) {
-        console.log('\n\n');
-        console.log(data);
-
         // Tweet it.
         var status = data + ' #worldcup';
         T.post('statuses/update', { status: status },
@@ -40,6 +37,11 @@ module.exports = function (app) {
             // Success.
         });
 
+        // Remove hashtags for texts.
+        if (data.indexOf('#') > 0)
+          data = data.substring(0, data.indexOf('#')).trim();
+
+        // Send texts to those appropriate.
         User.create.find({}).exec(function (err, users) {
           for (var i = 0; i < users.length; i ++) {
             (function (i, event) {
