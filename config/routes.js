@@ -37,12 +37,10 @@ module.exports = function (app) {
             // Success.
         });
 
-        console.log(data);
         // Remove hashtags for texts.
         if (data.indexOf('#') > 0)
           data = data.substring(0, data.indexOf('#')).trim();
 
-        console.log(data);
         // Send texts to those appropriate.
         User.create.find({}).exec(function (err, users) {
           for (var i = 0; i < users.length; i ++) {
