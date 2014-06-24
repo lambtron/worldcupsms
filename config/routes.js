@@ -37,10 +37,12 @@ module.exports = function (app) {
             // Success.
         });
 
+        console.log(data);
         // Remove hashtags for texts.
         if (data.indexOf('#') > 0)
           data = data.substring(0, data.indexOf('#')).trim();
 
+        console.log(data);
         // Send texts to those appropriate.
         User.create.find({}).exec(function (err, users) {
           for (var i = 0; i < users.length; i ++) {
@@ -49,23 +51,18 @@ module.exports = function (app) {
               if (!type)
                 type = 'goal';
 
-              console.log(users[i].type);
-              if (users[i].type == 'sub') {
+              if (type == 'sub') {
                 Twilio.sendMessage(users[i].phone_number, TWILIO_PHONE_NUMBER,
                   event);
-                console.log(event);
-              } else if (users[i].type == 'card' &&
+              } else if (type == 'card' &&
                 (event.indexOf('card') > 0 || event.indexOf('goal') > 0 ||
                 event.indexOf('game') > 0)) {
                 Twilio.sendMessage(users[i].phone_number, TWILIO_PHONE_NUMBER,
                   event);
-                console.log(event);
               } else if (event.indexOf('goal') > 0 || event.indexOf('game') > 0) {
                 Twilio.sendMessage(users[i].phone_number, TWILIO_PHONE_NUMBER,
                   event);
-                console.log(event);
               }
-              console.log('\n\n');
             })(i, this);
           }
         }.bind(data));
