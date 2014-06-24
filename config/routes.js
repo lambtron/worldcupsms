@@ -3,7 +3,7 @@
 (function() {
 
   /**
-   * Import helpers ==============================================================
+   * Import helpers ============================================================
    */
   var Twilio = require('../app/helpers/twilio');
   var Worldcup = require('../app/helpers/worldcup');
@@ -17,13 +17,13 @@
   });
 
   /**
-   * Import models ===============================================================
+   * Import models =============================================================
    */
   var User = require('../app/models/user');
 
   var TWILIO_PHONE_NUMBER = process.env.TWILIO_PHONE_NUMBER;
 
-  // Public functions. ===========================================================
+  // Public functions. =========================================================
   module.exports = function (app) {
     // Retrieve data from WorldCup endponit every minute.
     // If new event, then send POST request to phone numbers.
@@ -74,7 +74,7 @@
       pingAPI();
     }, 6000);
 
-  	// Application routes ========================================================
+  	// Application routes ======================================================
     app.post('/new', function (req, res) {
       // New person texting us.
       var phone_number = Twilio.standardizePhoneNumber(req.body.From);
@@ -94,7 +94,8 @@
       };
 
       // Add to mongoDB.
-      User.create.find({phone_number: phone_number}).exec(function (err, users) {
+      User.create.find({phone_number: phone_number}).exec(
+        function (err, users) {
         if (users.length > 0) {
           // Delete all duplicates.
           for (var i = 0; i < users.length - 1; i++) {
@@ -104,7 +105,8 @@
           }
 
           // Exists, so just update.
-          User.upsertUser(this.phone_number, this.type, function (err, records) {
+          User.upsertUser(this.phone_number, this.type,
+            function (err, records) {
             var msg = "You have updated your subscription settings to '" +
               this.type + "\'.";
             Twilio.sendMessage(this.phone_number, TWILIO_PHONE_NUMBER, msg);

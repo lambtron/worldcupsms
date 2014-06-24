@@ -1,32 +1,38 @@
-var mongoose = require('mongoose')
-  , Schema = mongoose.Schema
-  , ObjectId = Schema.ObjectId;
+'use strict'
 
-var UserSchema = new Schema({
-    id: ObjectId,
-    type: String, // goals, cards, subs
-    phone_number: String
-});
+(function () {
 
-var User = mongoose.model("User", UserSchema);
+  var mongoose = require('mongoose')
+    , Schema = mongoose.Schema
+    , ObjectId = Schema.ObjectId;
 
-module.exports = {
-  create: User,
+  var UserSchema = new Schema({
+      id: ObjectId,
+      type: String, // goals, cards, subs
+      phone_number: String
+  });
 
-  upsertUser: function (phone_number, type, cb) {
-    // var error = function (err) {
-    //   if (err)
-    //     throw err;
+  var User = mongoose.model("User", UserSchema);
 
-    //   cb();
-    // };
+  module.exports = {
+    create: User,
 
-    User.update( {phone_number: phone_number}, {
-      $set: {
-        type: type
-      }
-    },
-    {upsert: true},
-    cb);
-  }
-};
+    upsertUser: function (phone_number, type, cb) {
+      // var error = function (err) {
+      //   if (err)
+      //     throw err;
+
+      //   cb();
+      // };
+
+      User.update( {phone_number: phone_number}, {
+        $set: {
+          type: type
+        }
+      },
+      {upsert: true},
+      cb);
+    }
+  };
+
+}());

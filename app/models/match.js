@@ -1,32 +1,38 @@
-var mongoose = require('mongoose')
-  , Schema = mongoose.Schema
-  , ObjectId = Schema.ObjectId;
+'use strict'
 
-var MatchSchema = new Schema({
-    id: ObjectId,
-    match_number: Number,
-    status: String,
-    events: Array
-});
+(function () {
 
-var Match = mongoose.model("Match", MatchSchema);
+  var mongoose = require('mongoose')
+    , Schema = mongoose.Schema
+    , ObjectId = Schema.ObjectId;
 
-module.exports = {
-  create: Match,
+  var MatchSchema = new Schema({
+      id: ObjectId,
+      match_number: Number,
+      status: String,
+      events: Array
+  });
 
-  upsertMatch: function (match_number, status, events) {
-    var error = function (err) {
-      if (err)
-        throw err;
-    };
+  var Match = mongoose.model("Match", MatchSchema);
 
-    Match.update( {match_number: match_number}, {
-      $set: {
-        events: events,
-        status: status
-      }
-    },
-    {upsert: true},
-    error);
-  }
-};
+  module.exports = {
+    create: Match,
+
+    upsertMatch: function (match_number, status, events) {
+      var error = function (err) {
+        if (err)
+          throw err;
+      };
+
+      Match.update( {match_number: match_number}, {
+        $set: {
+          events: events,
+          status: status
+        }
+      },
+      {upsert: true},
+      error);
+    }
+  };
+
+}());

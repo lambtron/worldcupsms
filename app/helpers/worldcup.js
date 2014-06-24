@@ -1,6 +1,6 @@
 'use strict';
 
-(function() {
+(function () {
 
   var request = require('request');
   var path = 'http://worldcup.sfg.io/matches/today';
