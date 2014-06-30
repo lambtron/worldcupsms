@@ -48,32 +48,34 @@
             var eventDescription = '';
 
             if (data.length > 0) {
-              // Match exists. Find difference in events array.
-              var newEvents = _.filter(events, function (obj) {
-                return !_.findWhere(data[0].events, obj);
-              });
+              if (!(this.status == "completed" && data[0].status == "completed")) {
+                // Match exists. Find difference in events array.
+                var newEvents = _.filter(events, function (obj) {
+                  return !_.findWhere(data[0].events, obj);
+                });
 
-              if (newEvents.length > 0) {
-                for (var j = 0; j < newEvents.length; j++) {
-                  eventDescription += newEvents[j].time + "': " +
-                    newEvents[j].type_of_event + ", " +
-                    newEvents[j].player + ", " + newEvents[j].country + ". #" +
-                    newEvents[j].code + " ";
+                if (newEvents.length > 0) {
+                  for (var j = 0; j < newEvents.length; j++) {
+                    eventDescription += newEvents[j].time + "': " +
+                      newEvents[j].type_of_event + ", " +
+                      newEvents[j].player + ", " + newEvents[j].country + ". #" +
+                      newEvents[j].code + " ";
+                  }
                 }
-              }
 
-              // Check status.
-              if (this.status != data[0].status) {
-                if (this.status == "in progress") {
-                  // Game just started.
-                  eventDescription = "New game started between " +
-                    this.home_team.country + " and " + this.away_team.country +
-                    " at " + this.location + ". ";
-                } else if (this.status == "completed") {
-                  eventDescription = "Game is over! Final score is " +
-                    this.home_team.country + ": " + this.home_team.goals +
-                    ", " + this.away_team.country + ": " +
-                    this.away_team.goals + ". ";
+                // Check status.
+                if (this.status != data[0].status) {
+                  if (this.status == "in progress") {
+                    // Game just started.
+                    eventDescription = "New game started between " +
+                      this.home_team.country + " and " + this.away_team.country +
+                      " at " + this.location + ". ";
+                  } else if (this.status == "completed") {
+                    eventDescription = "Game is over! Final score is " +
+                      this.home_team.country + ": " + this.home_team.goals +
+                      ", " + this.away_team.country + ": " +
+                      this.away_team.goals + ". ";
+                  }
                 }
               }
             }
