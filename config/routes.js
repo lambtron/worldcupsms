@@ -75,6 +75,10 @@
     }, 6000);
 
   	// Application routes ======================================================
+    app.get('/number', function (req, res) {
+      res.send(200, {number: TWILIO_PHONE_NUMBER});
+    });
+
     app.post('/new', function (req, res) {
       // New person texting us.
       var phone_number = Twilio.standardizePhoneNumber(req.body.From);

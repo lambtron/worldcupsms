@@ -31,7 +31,7 @@
 
 <!-- SET THE CONTROLLER AND GET ALL TODOS WITH INITIALIZE FUNCTION -->
 <body>
-	<div class="container" style="width: 800px; padding-top: 40px">
+	<div ng-controller="mainController" class="container" style="width: 800px; padding-top: 40px">
 		<div class="row">
 			<div class="jumbotron">
 				<h1>
@@ -47,7 +47,8 @@
 					<span class="grey">
 						TEXT
 					</span>
-					(415) 801-0858
+					<!-- (415) 801-0858 -->
+					{{ $scope.number }}
 				</h1>
 			</div>
 			<p style="font-size: 1.8em; padding-top: 20px; line-height: 1.6em">
