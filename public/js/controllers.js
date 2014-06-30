@@ -10,6 +10,8 @@ worldcup.controller('mainController',
 	// Get the number.
 	$http.get('/number')
 	.success(function (data) {
+		console.log('Success.');
+		console.log(data);
 		number = data.number;
 	})
 	.error(function (data) {
